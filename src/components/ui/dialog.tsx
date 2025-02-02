@@ -11,10 +11,10 @@ const Dialog = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
 
 const DialogPortal = ({
-  className = "",
+  className,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal> & { className?: string }) => (
-  <DialogPrimitive.Portal className={cn(className)} {...props} />
+}: Omit<React.ComponentProps<typeof DialogPrimitive.Portal>, "className"> & { className?: string }) => (
+  <DialogPrimitive.Portal {...props} className={cn(className)} />
 );
 
 DialogPortal.displayName = DialogPrimitive.Portal.displayName;
