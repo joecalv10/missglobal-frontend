@@ -5,15 +5,23 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation"
+import { useDispatch } from "react-redux"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { setCookie } from "cookies-next";
 import axios from "axios";
-import { login } from "@/store/slices/authSlice";
 import Loading from "./Loading";
+import { setCookie } from "cookies-next";
+import { login } from "@/store/slices/authSlice";
 
-// Define the form schema with zod
 const formSchema = z.object({
   username: z
     .string()
@@ -27,29 +35,27 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+
   const { toast } = useToast();
+  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  // Define the submit handler
+  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>, e: any) {
     e.preventDefault();
 
     setIsLoading(true);
     try {
-      // API call to the login route
       const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`, // Use the backend API URL from the .env file
+        process.env.NEXT_PUBLIC_API_URL + "/auth/login",
         {
           email: values.username,
           password: values.password,
         }
       );
 
-      console.log("Login successful", data);  // Logging the response for debugging
-
-      // Set cookies for access token and refresh token
       setCookie("accessToken", data.message.accesstoken, {
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
         path: "/",
@@ -60,31 +66,23 @@ export function LoginForm() {
       });
       dispatch(login(true));
 
-      // Show success toast
       toast({
-        title: "Login Successful",
+        title: "Login Sucessfull",
       });
-
-      // Redirect based on role
-      if (data.message.role === "ADMIN") {
-        router.push("/admin/judges");
-      } else {
-        router.push("/");
-      }
-    } catch (err: any) {
-      setIsLoading(false);
-      console.error("Login error:", err);
       
-      // Show error toast with more detailed error handling
-      if (err.response) {
-        toast({
-          title: err.response.data.message || "Something went wrong!",
-        });
-      } else {
-        toast({
-          title: err.message || "Network error. Please try again later.",
-        });
-      }
+      console.log(data.message.role)
+
+      data.message.role === "ADMIN" ? router.push("/admin/judges") : router.push("/");
+
+    } catch (err:any) {
+      console.log(err);
+      setIsLoading(false);
+      if (err.response) return  toast({
+        title: err.response.data.message,
+      });
+      toast({
+        title: err.message,
+      });
     }
   }
 
@@ -92,17 +90,17 @@ export function LoginForm() {
     <>
       <Loading />
 
-      <div className="px-[25px] pt-[30px] max-w-[450px] m-auto mt-3">
+      <div className='px-[25px] pt-[30px] max-w-[450px] m-auto mt-3'>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
             <FormField
               control={form.control}
-              name="username"
+              name='username'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base">Email</FormLabel>
+                  <FormLabel className='text-base'>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="user@missglobal.com" {...field} />
+                    <Input placeholder='user@missglobal.com' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,22 +109,29 @@ export function LoginForm() {
 
             <FormField
               control={form.control}
-              name="password"
+              name='password'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-base">Password</FormLabel>
+                  <FormLabel className='text-base'>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <Input type='password' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button variant="grad" size={"full"} type="submit">
-              {isLoading ? "Wait.." : "Get In"}
+            <Button variant='grad' size={"full"} type='submit'>
+             {isLoading? "Wait..": "Get In" }
             </Button>
           </form>
         </Form>
+
+        {/* <p className="absolute w-full bottom-[50px] left-0 text-center px-[25px]">
+          Are you an admin?{" "}
+          <Link href="/login" className="text-grad">
+            Login here
+          </Link>
+        </p> */}
       </div>
     </>
   );
