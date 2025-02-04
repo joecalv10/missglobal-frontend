@@ -1,11 +1,15 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { useToast } from "@/components/ui/use-toast";
-import { useForm } from "react-hook-form";
-import axios from "axios";
 import { setCookie } from "cookies-next";
+import axios from "axios";
 import { login } from "@/store/slices/authSlice";
 import Loading from "./Loading";
 
@@ -43,6 +47,8 @@ export function LoginForm() {
         }
       );
 
+      console.log("Login successful", data);  // Logging the response for debugging
+
       // Set cookies for access token and refresh token
       setCookie("accessToken", data.message.accesstoken, {
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
@@ -67,15 +73,16 @@ export function LoginForm() {
       }
     } catch (err: any) {
       setIsLoading(false);
-      console.error(err);
-      // Show error toast
+      console.error("Login error:", err);
+      
+      // Show error toast with more detailed error handling
       if (err.response) {
         toast({
-          title: err.response.data.message,
+          title: err.response.data.message || "Something went wrong!",
         });
       } else {
         toast({
-          title: err.message,
+          title: err.message || "Network error. Please try again later.",
         });
       }
     }
