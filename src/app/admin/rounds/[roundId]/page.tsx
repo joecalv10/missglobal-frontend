@@ -1,17 +1,17 @@
 import ManageWinners from "@/components/admin/winners/ManageWinners";
-import { useRouter } from "next/router"; // Use useRouter hook for dynamic params
+import { useParams } from "next/navigation"; // Import from next/navigation
 import React from "react";
 
 export default function WinnersPage() {
-  const router = useRouter(); // This hook will give access to dynamic params
-  const { roundId } = router.query; // Access the roundId from the URL
+  const { roundId } = useParams(); // This will give you access to dynamic params like roundId
 
-  // You may want to check if roundId is available before rendering the component
+  // Ensure that roundId is available
   if (!roundId) return <div>Loading...</div>;
 
   return (
     <>
-      <ManageWinners roundId={roundId as string} /> {/* Pass roundId as string */}
+      <ManageWinners roundId={roundId} /> {/* Pass roundId directly */}
     </>
   );
 }
+
