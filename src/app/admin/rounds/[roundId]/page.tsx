@@ -1,3 +1,5 @@
+"use client"; // Add this directive to make the file a Client Component
+
 import ManageWinners from "@/components/admin/winners/ManageWinners";
 import { useParams } from "next/navigation"; // Import from next/navigation
 import React from "react";
@@ -14,4 +16,3 @@ export default function WinnersPage() {
     </>
   );
 }
-
