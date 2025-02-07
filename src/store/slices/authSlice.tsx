@@ -39,7 +39,7 @@ export const { login, logout, updateUser, firstTimeUserFetching } =
 
 
 // Actions
-export const fetchUsers = () => async (dispatch:Dispatch) => {
+export const fetchUser = () => async (dispatch:Dispatch) => {
   try {
     console.log("hi")
     const { data } = await axiosInstance.get("/user");

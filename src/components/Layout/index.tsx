@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-sync-scripts */
 
 import { useEffect } from "react";
-import { fetchUsers } from "../../store/slices/authSlice";
+import { fetchUser } from "../../store/slices/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import PageHeader from "../PageHeader";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch:AppDispatch = useDispatch();
 
   useEffect(() => {
-    if (isAuthenticated && !user._id) dispatch(fetchUsers());
+    if (isAuthenticated && !user._id) dispatch(fetchUser());
     else router.push("/login")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isAuthenticated]);
