@@ -9,7 +9,7 @@ import Layout from "../components/Layout/index";
 const poppins = Poppins({ weight: ["400", "600"], subsets: ["latin"] });
 const metatitle = "MissGlobal";
 const metadescription = `MissGlobal`;
-const websiteURL = "https://missglobal-frontend.vercel.app";
+const websiteURL = "https://scoring.missglobal.com/login";
 const socialImg = `${websiteURL}/social.jpg`;
 
 export const metadata: Metadata = {
