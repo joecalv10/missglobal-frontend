@@ -200,7 +200,7 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
               {/* PERSONALITY SCORE SLIDER */}
               <div className='slider mt-[25px]'>
                 <div className='text-left leading-none tracking-widest font-semibold'>
-                  PERSONALITY
+                {currentRound.CriteriaPerRound}
                 </div>
                 <div className='flex gap-[20px] items-center '>
                   <Slider
