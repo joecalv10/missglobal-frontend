@@ -25,6 +25,7 @@ import axiosInstance from "@/utils/axiosInterceptor";
 const formSchema = z.object({
   roundName: z.string(),
   contestantsToQualify: z.string(),
+  CriteriaPerRound: z.string(),
 });
 
 interface AddRoundProps {
@@ -108,6 +109,22 @@ export function AddRounds({ setRounds, rounds }: AddRoundProps) {
                   </FormLabel>
                   <FormControl>
                     <Input {...field} type="number"/>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="CriteriaPerRound"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base">
+                    Criteria Per Round
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
