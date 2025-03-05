@@ -51,8 +51,8 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
           updatedData.forEach((cont: any) => {
             if (!score[cont._id]) score[cont._id] = {};
             score[cont._id]["personality"] = [0];
-            score[cont._id]["attitude"] =[0];
-            score[cont._id]["pose"] =[0]
+            // score[cont._id]["attitude"] =[0];
+            // score[cont._id]["pose"] =[0]
           });
 
           setScore({ ...score });
@@ -84,8 +84,8 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
           allContestants.forEach((cont:any) => {
             if (!score[cont._id]) score[cont._id] = {};
             score[cont._id]["personality"] = [0];
-            score[cont._id]["attitude"] =[0];
-            score[cont._id]["pose"] =[0]
+            // score[cont._id]["attitude"] =[0];
+            // score[cont._id]["pose"] =[0]
           });
 
           setScore({ ...score });
@@ -137,8 +137,8 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
     let updatedScores = Object.keys(score).map((scr) => {
       return {
         personality: score[scr].personality[0],
-        pose: score[scr].pose[0],
-        attitude: score[scr].attitude[0],
+        // pose: score[scr].pose[0],
+        // attitude: score[scr].attitude[0],
         ratedBy: user._id,
         ratedTo: scr,
       };
