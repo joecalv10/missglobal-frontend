@@ -51,7 +51,7 @@ export function AddRounds({ setRounds, rounds }: AddRoundProps) {
       const { data } = await axiosInstance.post("/rounds", {
         name: values.roundName,
         qualifyContestants: values.contestantsToQualify,
-        CriteraPerRound: values.CriteriaPerRound,
+        CriteriaPerRound: values.CriteriaPerRound,
         isFirstRound,
       });
        data.message.isOngoingRound = isFirstRound;
