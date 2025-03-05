@@ -219,7 +219,7 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
                     ]}
                     step={1}
                     min={0}
-                    max={10}
+                    max={5}
                   />
 
                   <div className='!w-[60px] h-[50px] bg-grad flex justify-center items-center text-xl font-semibold rounded-[5px]'>
@@ -229,7 +229,7 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
               </div>
 
               {/* POISE SCORE SLIDER */}
-              <div className='slider mt-[5px]'>
+              {/* <div className='slider mt-[5px]'>
                 <div className='text-left leading-none tracking-widest font-semibold'>
                   POISE
                 </div>
@@ -251,10 +251,10 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
                     {score[contestants[contestantCount]._id]?.pose || 0}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* ATTITUDE SCORE SLIDER */}
-              <div className='slider mt-[5px]'>
+              {/* <div className='slider mt-[5px]'>
                 <div className='text-left leading-none tracking-widest font-semibold'>
                   ATTITUDE
                 </div>
@@ -275,14 +275,14 @@ const Contestants = ({ currentRound }: CurrentRoundProps) => {
                     ]}
                     step={1}
                     min={0}
-                    max={10}
+                    max={5}
                   />
 
                   <div className='!w-[60px] h-[50px] bg-grad flex justify-center items-center text-xl font-semibold rounded-[5px]'>
                     {score[contestants[contestantCount]._id]?.attitude || 0}
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className='controls flex justify-between items-center mt-8'>
               <button
